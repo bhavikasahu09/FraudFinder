@@ -163,13 +163,6 @@ Dashboard will open at `http://localhost:8501`
 
 ---
 
-## 👥 Team
-
-**CDAC Pune - DBDA Batch 2024-25**
-
-- **Member 1** - AI/ML Focus - Model Development
-- **Member 2** - ECE Background - Data Engineering
-- **Member 3** - Gaming Background - UI/Visualization
 
 ---
 
@@ -204,13 +197,6 @@ This project is for educational purposes as part of CDAC DBDA curriculum.
 - Kaggle for datasets
 - Open-source ML community
 
----
-
-## 📧 Contact
-
-For queries or collaboration:
-- GitHub Issues: [Open an issue](https://github.com/your-username/fraudfinder/issues)
-- Email: your-email@example.com
 
 ---
 
