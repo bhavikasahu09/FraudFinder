@@ -88,7 +88,7 @@ insurance-fraud-detection/
 
 ### Clone Repository
 ```bash
-git clone https://github.com/your-username/fraudfinder.git
+git clone https://github.com/sumitnagpure/FraudFinder.git
 cd fraudfinder
 ```
 
@@ -109,7 +109,7 @@ pip install -r requirements.txt
 ```
 
 ### Download Dataset
-1. Go to [Kaggle Insurance Fraud Dataset](https://www.kaggle.com/)
+1. Go to [Kaggle Insurance Fraud Dataset](https://www.kaggle.com/datasets/shivamb/vehicle-claim-fraud-detection)
 2. Download and place in `data/raw/` folder
 
 ---
