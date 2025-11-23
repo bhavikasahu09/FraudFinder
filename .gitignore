@@ -1,0 +1,2 @@
+# Ignore MS Office temporary owner/lock files (starts with tilde and dollar sign)
+~$*
