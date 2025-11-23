@@ -89,7 +89,7 @@ insurance-fraud-detection/
 ### Clone Repository
 ```bash
 git clone https://github.com/sumitnagpure/FraudFinder.git
-cd fraudfinder
+cd FraudFinder
 ```
 
 ### Create Virtual Environment
