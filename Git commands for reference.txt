@@ -1,0 +1,43 @@
+# Miscellaneous
+
+# To check current username
+git config user.name
+
+# To check current email
+git config user.email
+
+# Check current user
+whoami
+
+---------------------------------------------------------
+# to pull from repo
+git pull
+
+# get the merged changes
+git pull origin main
+
+# create and switch to a new branch
+git switch -c <branch_name>
+
+# delete the local branch
+git branch -d <branch_name>
+
+# delete remote branch
+
+# switch back to the main branch
+git switch main
+
+# to stage all modified files
+git add .
+
+# to check which files are staged/unstaged
+git status
+
+# to stage a specific file
+git add path/to/your/file.js
+
+# commit your changes
+git commit -m "Your commit message here"
+
+# push you changes (check status before you push)
+git push
