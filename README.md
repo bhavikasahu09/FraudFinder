@@ -156,7 +156,7 @@ Dashboard will open at `http://localhost:8501`
 ## 📈 Project Roadmap
 
 - [x] Project setup and repository initialization
-- [ ] **Week 1:** Dataset collection, cleaning, EDA
+- [x] **Week 1:** Dataset collection, cleaning, EDA
 - [ ] **Week 2:** Model training, tuning, evaluation
 - [ ] **Week 3:** SHAP explainability, dashboard development
 - [ ] **Week 4:** Deployment, testing, documentation
