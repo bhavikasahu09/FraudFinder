@@ -1,203 +1,82 @@
-# FraudFinder: Predictive Modeling for Insurance Claim Fraud Detection
+# 🛡️ FraudFinder: Insurance Claim Risk Prediction
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![ML](https://img.shields.io/badge/ML-Scikit--learn-orange)
-![Framework](https://img.shields.io/badge/Framework-Streamlit-red)
-![Status](https://img.shields.io/badge/Status-In%20Development-yellow)
-
-## 📌 Overview
-
-FraudFinder uses machine learning to automatically identify fraudulent insurance claims by analyzing claim patterns and customer data. It provides real-time fraud predictions through an interactive web dashboard with explainability features.
-
-**Domain:** BFSI (Banking, Financial Services, Insurance)  
-**Type:** Supervised Classification  
-**Institution:** CDAC Pune - DBDA Program
+FraudFinder is a machine learning solution designed to identify fraudulent insurance claims in the BFSI domain. It uses a tuned **XGBoost classifier** to flag high-risk claims and provides model interpretability using **SHAP values**.
 
 ---
 
-## 🎯 Features
+## 📊 Model Strategy & Performance
 
-- **Fraud Detection:** Binary classification (Fraudulent/Genuine) with confidence scores
-- **Multiple ML Models:** Logistic Regression, Random Forest, XGBoost, Neural Networks
-- **Explainability:** SHAP values showing why claims are flagged
-- **Interactive Dashboard:** User-friendly web interface for real-time predictions
-- **Visualization:** Fraud patterns, feature importance, and performance metrics
-- **Model Comparison:** Side-by-side evaluation of different algorithms
+Insurance fraud detection is a highly imbalanced classification problem. To reduce missed fraud cases, the model is optimized primarily for **Recall**.
+
+### Model Details
+
+* **Algorithm**: XGBoost Classifier
+* **Class Imbalance Handling**: `scale_pos_weight = 15`
+* **Custom Decision Threshold**: `0.14`
+
+### Key Metrics (Fraud Class)
+
+* **Recall**: ~70.27%
+* **Precision**: ~17.47%
+* **F1-Score**: ~0.28
+
+---
+
+## 🔍 Explainability with SHAP
+
+The application integrates **SHAP (SHapley Additive exPlanations)** to explain individual predictions. For each claim, the dashboard highlights the most influential features contributing to the fraud risk score, such as:
+
+* `Age`
+* `PastNumberOfClaims`
+* `VehiclePrice`
+
+This improves transparency and trust in model decisions.
 
 ---
 
 ## 🛠️ Tech Stack
 
-**Languages & Libraries:**
-- Python 3.8+
-- pandas, numpy (Data processing)
-- scikit-learn, xgboost (Machine Learning)
-- imbalanced-learn (Handling class imbalance)
-- SHAP (Model explainability)
-- matplotlib, seaborn, plotly (Visualization)
-
-**Deployment:**
-- Streamlit (Web framework)
-- Streamlit Cloud (Hosting)
-
-**Tools:**
-- Jupyter Notebook (Development)
-- Git/GitHub (Version control)
+* **Language**: Python 3.8+
+* **Machine Learning**: XGBoost, Scikit-learn, SHAP
+* **Frontend**: Streamlit
+* **Data Processing**: Pandas, NumPy
 
 ---
 
-## 📂 Project Structure
+## 🚀 Setup and Usage
 
-```
-insurance-fraud-detection/
-│
-├── data/
-│   ├── raw/                    # Original datasets
-│   └── processed/              # Cleaned datasets
-│
-├── notebooks/
-│   ├── 01_data_cleaning.ipynb
-│   ├── 02_eda.ipynb
-│   ├── 03_model_training.ipynb
-│   └── 04_evaluation.ipynb
-│
-├── models/
-│   ├── best_model.pkl          # Saved trained model
-│   └── scaler.pkl              # Feature scaler
-│
-├── app/
-│   ├── app.py                  # Streamlit dashboard
-│   └── utils.py                # Helper functions
-│
-├── docs/
-│   ├── project_report.pdf
-│   └── presentation.pptx
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
+### 1. Installation
 
----
-
-## 🚀 Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
-
-### Clone Repository
 ```bash
-git clone https://github.com/sumitnagpure/FraudFinder.git
+git clone https://github.com/sumitnagpure/BDT.git
 cd FraudFinder
-```
-
-### Create Virtual Environment
-```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
-
-# Mac/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Install Dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-### Download Dataset
-1. Go to [Kaggle Insurance Fraud Dataset](https://www.kaggle.com/datasets/shivamb/vehicle-claim-fraud-detection)
-2. Download and place in `data/raw/` folder
+### 2. Run the Dashboard
 
----
-
-## 💻 Usage
-
-### 1. Data Preparation
-```bash
-jupyter notebook notebooks/01_data_cleaning.ipynb
-```
-
-### 2. Exploratory Data Analysis
-```bash
-jupyter notebook notebooks/02_eda.ipynb
-```
-
-### 3. Model Training
-```bash
-jupyter notebook notebooks/03_model_training.ipynb
-```
-
-### 4. Run Streamlit Dashboard
 ```bash
 streamlit run app/app.py
 ```
 
-Dashboard will open at `http://localhost:8501`
+---
+
+## 📂 Repository Structure
+
+```
+FraudFinder/
+│
+├── app/         # Streamlit web application
+├── models/      # Trained model and preprocessing objects (joblib)
+├── notebooks/   # EDA and model training notebooks
+├── data/        # Raw and processed datasets
+└── requirements.txt
+```
 
 ---
 
-## 📊 Model Performance
+## 📌 Notes
 
-| Model | Accuracy | Precision | Recall | F1-Score |
-|-------|----------|-----------|--------|----------|
-| Logistic Regression | TBD | TBD | TBD | TBD |
-| Random Forest | TBD | TBD | TBD | TBD |
-| XGBoost | TBD | TBD | TBD | TBD |
-| Neural Network | TBD | TBD | TBD | TBD |
-
-*Results will be updated after model training*
-
----
-
-## 📈 Project Roadmap
-
-- [x] Project setup and repository initialization
-- [x] **Week 1:** Dataset collection, cleaning, EDA
-- [ ] **Week 2:** Model training, tuning, evaluation
-- [ ] **Week 3:** SHAP explainability, dashboard development
-- [ ] **Week 4:** Deployment, testing, documentation
-
----
-
-
----
-
-## 📝 Key Learnings
-
-- Handling imbalanced datasets in classification problems
-- Implementing explainable AI using SHAP
-- End-to-end ML pipeline: data → model → deployment
-- Real-world BFSI domain application
-
----
-
-## 🔮 Future Enhancements
-
-- [ ] Add deep learning models (LSTM, Transformers)
-- [ ] Implement real-time API endpoint
-- [ ] Add user authentication
-- [ ] Deploy on AWS/Azure with database integration
-- [ ] Mobile app version
-
----
-
-## 📄 License
-
-This project is for educational purposes as part of CDAC DBDA curriculum.
-
----
-
-## 🙏 Acknowledgments
-
-- CDAC Pune for project guidance
-- Kaggle for datasets
-- Open-source ML community
-
-
----
-
-**⭐ If you find this project useful, please consider giving it a star!**
+* The model is recall-focused and may produce higher false positives.
+* Threshold tuning is intentionally aggressive to minimize missed fraud cases.
+* SHAP plots are generated dynamically for prediction-level explainability.

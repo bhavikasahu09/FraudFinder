@@ -1,2 +1,30 @@
 # Ignore MS Office temporary owner/lock files (starts with tilde and dollar sign)
 ~$*
+# Python environment
+venv/
+env/
+.env
+bin/
+lib/
+include/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Streamlit local config
+.streamlit/config.toml
+
+# Model artifacts (Optional: only if you prefer to host them elsewhere)
+# If the files are small (<100MB), you can comment these out to keep them on GitHub
+#*.joblib
+#*.pkl
+
+# Data files
+#data/raw/*.csv
+#data/processed/*.csv
