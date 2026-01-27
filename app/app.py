@@ -9,14 +9,25 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 # ===============================
 # Load assets
 # ===============================
-models='../models/'
-model = joblib.load(models+"best_xgb_model.joblib")
-encoder = joblib.load(models+"encoder.joblib")
-scaler = joblib.load(models+"scaler.joblib")
-feature_names = joblib.load(models+"feature_names.joblib")
 
-X_val = joblib.load(models+"X_val.joblib")
-y_val = joblib.load(models+"y_val.joblib")
+import os
+import joblib
+
+# 1. Get the absolute path to the directory where app.py is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Join it with the relative path to the models folder
+# This goes up one level from 'app' to the root, then into 'models'
+models_path = os.path.join(current_dir, "..", "models")
+
+# 3. Load your assets using the joined paths
+model = joblib.load(os.path.join(models_path, "best_xgb_model.joblib"))
+encoder = joblib.load(os.path.join(models_path, "encoder.joblib"))
+scaler = joblib.load(os.path.join(models_path, "scaler.joblib"))
+feature_names = joblib.load(os.path.join(models_path, "feature_names.joblib"))
+
+X_val = joblib.load(os.path.join(models_path, "X_val.joblib"))
+y_val = joblib.load(os.path.join(models_path, "y_val.joblib"))
 
 threshold = 0.14
 
@@ -48,7 +59,9 @@ st.divider()
 st.sidebar.header("Claim Details")
 
 fault = st.sidebar.radio("Fault", ["Policy Holder", "Third Party"])
-base_policy = st.sidebar.selectbox("Base Policy", ["All Perils", "Collision", "Liability"])
+base_policy = st.sidebar.selectbox(
+    "Base Policy", ["All Perils", "Collision", "Liability"]
+)
 vehicle_cat = st.sidebar.selectbox("Vehicle Category", ["Sedan", "Sport", "Utility"])
 vehicle_price = st.sidebar.selectbox(
     "Vehicle Price",
@@ -61,11 +74,26 @@ vehicle_price = st.sidebar.selectbox(
         "more than 69000",
     ],
 )
-past_claims = st.sidebar.selectbox("Past Claims", ["none", "1", "2 to 4", "more than 4"])
+past_claims = st.sidebar.selectbox(
+    "Past Claims", ["none", "1", "2 to 4", "more than 4"]
+)
 
 month = st.selectbox(
     "Month",
-    ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ],
 )
 age = st.number_input("Age", 18, 100, 30)
 
@@ -77,15 +105,19 @@ if st.button("Analyze Risk"):
     # ===============================
     # Build user input
     # ===============================
-    user_data = pd.DataFrame([{
-        "Fault": fault,
-        "BasePolicy": base_policy,
-        "VehicleCategory": vehicle_cat,
-        "VehiclePrice": vehicle_price,
-        "PastNumberOfClaims": past_claims,
-        "Month": month,
-        "Age": age,
-    }])
+    user_data = pd.DataFrame(
+        [
+            {
+                "Fault": fault,
+                "BasePolicy": base_policy,
+                "VehicleCategory": vehicle_cat,
+                "VehiclePrice": vehicle_price,
+                "PastNumberOfClaims": past_claims,
+                "Month": month,
+                "Age": age,
+            }
+        ]
+    )
 
     # ===============================
     # Align with training columns
@@ -128,10 +160,9 @@ if st.button("Analyze Risk"):
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_final)
 
-    shap_df = pd.DataFrame({
-        "Feature": feature_names,
-        "Impact": shap_values[0]
-    }).sort_values(by="Impact", key=abs, ascending=False)
+    shap_df = pd.DataFrame(
+        {"Feature": feature_names, "Impact": shap_values[0]}
+    ).sort_values(by="Impact", key=abs, ascending=False)
 
     st.subheader("🔍 Why this decision?")
     st.dataframe(shap_df.head(6))
