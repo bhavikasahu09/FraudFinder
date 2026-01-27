@@ -6,9 +6,9 @@ import shap
 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# ===============================
+# ================
 # Load assets
-# ===============================
+# ================
 
 import os
 import joblib
@@ -31,9 +31,9 @@ y_val = joblib.load(os.path.join(models_path, "y_val.joblib"))
 
 threshold = 0.14
 
-# ===============================
+# ====================
 # Dynamic metrics
-# ===============================
+# ====================
 y_prob = model.predict_proba(X_val)[:, 1]
 y_pred = (y_prob >= threshold).astype(int)
 
@@ -43,9 +43,9 @@ f1 = f1_score(y_val, y_pred)
 accuracy = accuracy_score(y_val, y_pred)
 
 
-# ===============================
+# =========
 # UI
-# ===============================
+# =========
 st.title("🛡️ FraudFinder – Insurance Claim Risk")
 
 st.subheader("📊 Model Performance")
@@ -97,14 +97,14 @@ month = st.selectbox(
 )
 age = st.number_input("Age", 18, 100, 30)
 
-# ===============================
+# =============
 # Prediction
-# ===============================
+# =============
 if st.button("Analyze Risk"):
 
-    # ===============================
+    # ======================
     # Build user input
-    # ===============================
+    # ======================
     user_data = pd.DataFrame(
         [
             {
@@ -138,9 +138,11 @@ if st.button("Analyze Risk"):
     # Ensure correct order
     user_data = user_data[cat_cols + num_cols]
 
-    # ===============================
+    # ================
     # Encode + scale
-    # ===============================
+    # ================
+    # Encode categorical features and scale numerical features
+    # so the user input matches the training data format
     X_cat = encoder.transform(user_data[cat_cols])
     X_num = user_data[num_cols].values
 
@@ -149,14 +151,17 @@ if st.button("Analyze Risk"):
 
     prob = model.predict_proba(X_final)[0][1]
 
+    # Classify risk based on the pre-defined threshold
     if prob >= threshold:
         st.error(f"🚨 HIGH RISK — {prob:.2%}")
     else:
         st.success(f"✅ LOW RISK — {prob:.2%}")
 
-    # ===============================
+    # ==================
     # SHAP Explanation
-    # ===============================
+    # ==================
+
+    # Explain model prediction using SHAP for transparency
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(X_final)
 
