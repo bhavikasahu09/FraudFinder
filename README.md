@@ -11,14 +11,16 @@ Insurance fraud detection is a highly imbalanced classification problem. To redu
 ### Model Details
 
 * **Algorithm**: XGBoost Classifier
-* **Class Imbalance Handling**: `scale_pos_weight = 15`
+* **Class Imbalance Handling**: `scale_pos_weight = 15.714092140921409`
 * **Custom Decision Threshold**: `0.14`
 
 ### Key Metrics (Fraud Class)
 
-* **Recall**: ~70.27%
-* **Precision**: ~17.47%
-* **F1-Score**: ~0.28
+* **Recall**: ~93.51%
+* **Precision**: ~13.01%
+* **F1-Score**: ~0.23
+
+**Metric Priority**: In the BFSI domain, we prioritize Recall over Precision. It is more critical to catch every potential risk (minimizing False Negatives) than to avoid occasional false alarms.
 
 ---
 
