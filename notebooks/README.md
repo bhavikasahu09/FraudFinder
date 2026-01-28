@@ -25,4 +25,6 @@ This folder contains the complete workflow for an insurance fraud detection proj
 Python, pandas, scikit-learn, imbalanced-learn
 
 ## Notes
-This project prioritizes fraud detection performance and realistic evaluation over raw accuracy.
+* This project prioritizes fraud detection performance and realistic evaluation over raw accuracy.
+* Class imbalance was handled using cost-sensitive learning and threshold tuning rather than undersampling to avoid information loss.
+
