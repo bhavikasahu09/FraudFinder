@@ -106,3 +106,4 @@ FraudFinder/
 * The model is recall-focused and may produce higher false positives.
 * Threshold tuning is intentionally aggressive to minimize missed fraud cases.
 * SHAP plots are generated dynamically for prediction-level explainability.
+* Class imbalance was handled using cost-sensitive learning and threshold tuning rather than undersampling to avoid information loss.
