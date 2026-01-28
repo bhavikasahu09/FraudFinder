@@ -22,9 +22,9 @@ __pycache__/
 
 # Model artifacts (Optional: only if you prefer to host them elsewhere)
 # If the files are small (<100MB), you can comment these out to keep them on GitHub
-#*.joblib
-#*.pkl
+# *.joblib
+# *.pkl
 
 # Data files
-#data/raw/*.csv
-#data/processed/*.csv
+# data/raw/*.csv
+# data/processed/*.csv
